@@ -115,9 +115,9 @@ $tim=strtotime($ti)+3*60+3601; //
 $refreshAfter =$tim-time();
 
 
-echo '<P class="mb-5" style="text-align: center"> refreshAfter :';
-	echo $refreshAfter;
-	echo "  Seconds</P>";
+//echo '<P class="mb-5" style="text-align: center"> refreshAfter :</P>';
+	//echo $refreshAfter;
+	//echo "  Seconds</P>";
 
  
 //Send a Refresh header to the browser.
@@ -125,6 +125,38 @@ header('Refresh: ' . $refreshAfter);
 $db=null;
 
 ?>
+
+	 
+<p id="demo" class="mb-5" style="text-align: center"></p>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = <?php echo json_encode($tim); 
+//<?php echo json_encode($ti); ?>;
+//var ccountDownDate=  countDownDate.getTime();
+// Update the count down every 1 second
+var i=1;
+var distance = <?php echo json_encode($refreshAfter); ?>;
+var x = setInterval(function() {
+
+  // Get today's date and time
+  //var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+ 
+  
+    
+  // Time calculations for days, hours, minutes and seconds
+  var minutes =  parseInt(distance/60);
+  var seconds =  distance-minutes*60;
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = "refreshAfter : "+ minutes+"min:" +seconds+"seconds";
+      distance = distance -1;
+
+}, 1000);
+</script>
+
   <?php
  
   
@@ -172,7 +204,10 @@ foreach($db->query($sql) as $row)
 
 							
 					
-					<br>
+					
+					
+				
+					
 					<?php 
 					//a = temperature
 					 //b=seuil
